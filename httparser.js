@@ -15,7 +15,7 @@ export class HTTPRequest {
         }
 
         // Parse data
-        const lines = data.split('\r\n')
+        const lines = data.split(/\r?\n/)
 
         // First line
         const firstLine = lines.shift()
@@ -37,7 +37,7 @@ export class HTTPRequest {
 
         // Body
         if (lines.length > 0) {
-            this.body = lines.join('\r\n')
+            this.body = lines.join('\n')
         }
         else {
             this.body = null
