@@ -39,4 +39,16 @@ export default class HTTPRequest {
             this.body = null
         }
     }
+
+    toString() {
+        let result = `HTTP/${this.protocolVersion} ${this.statusCode} ${this.reason}\r\n`
+        for (const key in this.headers) {
+            result += `${key}: ${this.headers[key]}\r\n`
+        }
+        result += '\r\n'
+        if (this.body) {
+            result += this.body
+        }
+        return result
+    }
 }

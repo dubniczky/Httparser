@@ -40,4 +40,16 @@ export default class HTTPRequest {
             this.body = null
         }
     }
+
+    toString() {
+        let result = `${this.method} ${this.url} HTTP/${this.protocolVersion}\r\n`
+        for (const key in this.headers) {
+            result += `${key}: ${this.headers[key]}\r\n`
+        }
+        result += '\r\n'
+        if (this.body) {
+            result += this.body
+        }
+        return result
+    }
 }
