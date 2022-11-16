@@ -12,7 +12,6 @@ export default class HTTPRequest {
 
         // Parse data
         const lines = data.split('\r\n')
-        console.log(lines.length)
 
         // First line
         const firstLine = lines.shift()
