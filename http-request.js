@@ -1,13 +1,13 @@
 export default class HTTPRequest {
     protocolVersion // Version of the http protocol specified in the first line
-    method
-    url
-    body
-    headers
+    method // Method of the request (GET, POST, etc)
+    url // URL including path, query and fragment
+    body // Any data in body
+    headers // Map of headers
 
-    path
-    query
-    fragment
+    path // Path part of the url
+    query // Map of query parameters
+    fragment // String of text after # mark
 
     constructor(data) {
         if (!data) {
