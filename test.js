@@ -1,8 +1,7 @@
 import fs from 'fs'
 import { describe, test } from '@jest/globals'
 
-import HTTPRequest from './http-request.js'
-import HTTPResponse from './http-response.js'
+import { HTTPRequest, HTTPResponse } from './httparser.js'
 
 
 describe("HTTP Request", () => {
