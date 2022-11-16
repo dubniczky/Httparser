@@ -8,5 +8,8 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.3.1"
+  },
+  "exports": {
+    "import": "./httparser.js"
   }
 }
