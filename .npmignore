@@ -1,0 +1,5 @@
+.git/
+
+examples/readme.md
+.gitignore
+Makefile
