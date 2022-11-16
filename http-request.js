@@ -5,6 +5,10 @@ export default class HTTPRequest {
     body
     headers
 
+    path
+    query
+    fragment
+
     constructor(data) {
         if (!data) {
             throw new Error('Http data cannot be null')
@@ -37,6 +41,26 @@ export default class HTTPRequest {
         }
         else {
             this.body = null
+        }
+
+        // Parse url parts
+        this._parseURL(this.url)
+    }
+
+    _parseURL(url) {
+        // Path
+        let [path, remaining] = url.split('?')
+        this.path = path
+
+        let [query, fragment] = remaining.split('#')
+        this.fragment = fragment
+        
+        // Query
+        this.query = {}
+        query = query.split('&')
+        for (const param of query) {
+            const [key, value] = param.split('=')
+            this.query[key] = value
         }
     }
 

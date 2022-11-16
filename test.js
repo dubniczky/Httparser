@@ -16,11 +16,22 @@ describe("HTTP Request", () => {
         const request = new HTTPRequest(data)
 
         expect(request.method).toBe('GET')
-        expect(request.url).toBe('/index.html')
+        expect(request.url).toBe('/index.html?a=5&b=asd#footer')
         expect(request.protocolVersion).toBe('1.1')
         expect(request.headers['Host']).toBe('www.example.com')
         expect(request.headers['Connection']).toBe('Keep-Alive')
         expect(request.body).toBe('')
+    })
+
+    test("Calculates correct values", () => {
+        const data = fs.readFileSync('examples/get.request.http', 'utf8')
+        const request = new HTTPRequest(data)
+
+        /// index.html?a=5&b=asd#footer
+        expect(request.path).toBe('/index.html')
+        expect(request.query['a']).toBe('5')
+        expect(request.query['b']).toBe('asd')
+        expect(request.fragment).toBe('footer')
     })
 })
  
