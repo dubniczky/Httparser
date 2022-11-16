@@ -15,10 +15,10 @@ export default class HTTPRequest {
 
         // First line
         const statusLine = lines.shift()
-        const [protocolVersion, statusCode, reason] = statusLine.split(' ')
+        const [protocolVersion, statusCode, ...reason] = statusLine.split(' ')
         this.protocolVersion = protocolVersion.split('/')[1]
         this.statusCode = parseInt(statusCode)
-        this.reason = reason
+        this.reason = reason.join(' ')
 
         // Headers
         this.headers = {}
