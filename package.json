@@ -3,8 +3,15 @@
   "version": "1.1.0",
   "description": "",
   "type": "module",
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "http",
+    "parser",
+    "http-parser",
+    "purejs",
+    "purse-javascript",
+    "zero-dependencies"
+  ],
+  "author": "Richard Antal Nagy",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.3.1"
