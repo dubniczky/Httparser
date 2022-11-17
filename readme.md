@@ -55,3 +55,13 @@ console.log(response.body)
 
 console.dir(response)
 ```
+
+### Body Parsing
+
+By default, parsing JSON and form objects are supported. They can be explicitly turned off by using the following constructor:
+
+```js
+const req = HTTPRequest(data, false)
+```
+
+Otherwise, parsed JSON will be added to the `json` property, and a parsed form will be added to the 

@@ -8,8 +8,9 @@ export class HTTPRequest {
     path // Path part of the url
     query // Map of query parameters
     fragment // String of text after # mark
+    parsed // Parsed body
 
-    constructor(data) {
+    constructor(data, autoParseBody = true) {
         if (!data) {
             throw new Error('Http data cannot be null')
         }
@@ -42,6 +43,10 @@ export class HTTPRequest {
         else {
             this.body = null
         }
+        this.parsed = null
+        if (autoParseBody && this.body) {
+            this._parseBody()
+        }
 
         // Parse url parts
         this._parseURL(this.url)
@@ -51,7 +56,11 @@ export class HTTPRequest {
         // Path
         let [path, remaining] = url.split('?')
         this.path = path
+        if (!remaining) {
+            return
+        }
 
+        // Fragment
         let [query, fragment] = remaining.split('#')
         this.fragment = fragment
         
@@ -62,6 +71,27 @@ export class HTTPRequest {
             const [key, value] = param.split('=')
             this.query[key] = value
         }
+    }
+
+    _parseBody() {
+        // JSON
+        if (this.headers['Content-Type'] == 'application/json') {
+            this.parsed = JSON.parse(this.body)
+            return
+        }
+
+        // Form
+        if (this.headers['Content-Type'] == 'application/x-www-form-urlencoded') {
+            this.parsed = {}
+            const params = this.body.split('&')
+            for (const param of params) {
+                const [key, value] = param.split('=')
+                this.parsed[key] = value
+            }
+            return
+        }
+
+        // other parsing options...
     }
 
     toString() {
